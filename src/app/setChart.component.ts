@@ -109,7 +109,7 @@ export class SetChart {
   private changeFlag = false; // possibly depricated, consider removal
 
   // creating instance of LoggerService, initializing the high-charts options
-  constructor (private loggerService: LoggerService, 
+  constructor (public loggerService: LoggerService, 
     private sanitizer: DomSanitizer, 
     private _applicationRef: ApplicationRef,
     public dataManip: DataManip) {
