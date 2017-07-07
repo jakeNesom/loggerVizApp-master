@@ -131,6 +131,11 @@ export class DisplayComponent implements OnDestroy  {
 
     //this.loggerService.getLoggerData()
     //  .then(dataset => this.setData(dataset) );
+
+    this.loggerService.createEntries()
+      .then(res => console.log(res));
+      
+      
   }
 
 

@@ -39,12 +39,22 @@ interface FilterType {
 export class LoggerService {
 
     //private loggerUrl = 'api/loggerData';
+
+    private jakeMacCreateEntriesUrl = 'http://www.localhost:3000/logv/write?create=true';
+    private jakeMacObjUrl = 'http://www.localhost:3000/logv/read/getfiltered/aggregate';
+    private jakeMacGetAll = 'http://www.localhost:3000/logv/read/getfiltered';
+
     private loggerURL = 'http://localhost:3039/read/getall/';
     private filterURL = 'http://localhost:3039/read/filterget'; // POST URL - depricated
     private objURL = 'http://localhost:3039/read/getfiltered'; // returns entire log objects
     private objPartURL = 'http://localhost:3039/read/getfiltered' // returns Message, LogType, _id?
     private generalCountURL = 'http://localhost:3039/read/getfiltered/aggregate'; //returns count
     private uniqueCountURL = 'http://localhost:3039/read/getfiltered/count'; // returns count by Node, Client, LogType, filter by time
+
+    private carnitasReadAll = 'http://carnitas.rocks/mea/logv/read/all';
+    private carnitasAggregate = 'http://carnitas.rocks/mea/logv/read/getfiltered/aggregate';
+    private carnitasCreateEntries = 'http://carnitas.rocks/mea/logv/write';
+    private carnitasGetAll = 'http://carnitas.rocks/mea/logv/read/getfiltered';
 
     private subject = new Subject<any>();
     private headers: Headers;
@@ -63,7 +73,7 @@ export class LoggerService {
     };
 
     public filterObj:any = {
-        'database': 'clientserverExpSockIO',
+        'database': 'db1',
         'startTime': new Date().getTime() - 1800000,
         'stopTime': new Date().getTime(),
         'Client': '',
@@ -132,6 +142,18 @@ export class LoggerService {
         this.filterObj.stopTime = stopTime;
     }
 
+    createEntries(): Promise <any> {
+        // creates 30 entries for the last 30 minutes timeFrame
+        
+        const url = this.jakeMacCreateEntriesUrl;
+
+        return this.http.get(url)
+            .toPromise()
+            .then( response => {
+                console.log(response);
+                response.json() })
+            .catch(this.handleError);
+    }
     getRange2(time?:string): Observable<any>
     {
         this.setStartStopTime(time);
@@ -161,8 +183,9 @@ export class LoggerService {
             filter.stopTime = stopTime;
         }
         if (!returnType) returnType = this.filterObj.returnType;
-        if ( returnType === 'genCount') URL = this.generalCountURL;
-        else if ( returnType === 'obj') URL = this.objURL;
+        //if ( returnType === 'genCount') URL = this.generalCountURL;
+        if ( returnType === 'genCount') URL = this.jakeMacObjUrl;
+        else if ( returnType === 'obj') URL = this.jakeMacObjUrl;
         else if ( returnType === 'objPart') URL = this.objPartURL;
 
         let params: URLSearchParams = new URLSearchParams();
@@ -223,7 +246,8 @@ export class LoggerService {
         let observableArr = [];
 
         if (!returnType) returnType = this.filterObj.returnType;
-        if (returnType === 'genCount') URL = this.generalCountURL;
+        // if (returnType === 'genCount') URL = this.generalCountURL;
+        if (returnType === 'genCount') URL = this.jakeMacObjUrl;
         else if (returnType === 'obj') URL = this.objURL;
         else if (returnType === 'objPart') URL = this.objPartURL;
 
