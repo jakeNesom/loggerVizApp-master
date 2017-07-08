@@ -120,7 +120,7 @@ export class SetChart {
           categories: ["Node A", "Node B", "Node C", "Node D"]
         },
         chart: { type: 'column' },
-        title: { text: '' },
+        title: { text: 'Clients' },
         legend: {
             enabled: false,
         },

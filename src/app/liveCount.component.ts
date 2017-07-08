@@ -88,7 +88,7 @@ export class LiveCount {
 
             },
             title: {
-                text: 'All Nodes Over Time'
+                text: 'Logs Over Time'
             },
             xAxis: {
                 type: 'datetime',
@@ -390,7 +390,7 @@ export class LiveCount {
         //data = this.testData;
         //timeInterval = "last30";
       
-        this.chart.title.update({ "text": "All Nodes Over " + this.range });
+        //this.chart.title.update({ "text": "All Nodes Over " + this.range });
         let dataTypeArr = [];
         let dataByType: Object = {};
         let intervalArr = this.createInterval(timeInterval);
@@ -477,7 +477,7 @@ export class LiveCount {
             this.chart.addSeries(stubChartObj.series[l]);
         }
 
-        this.chart.title.update({ "text": this.dataManip.genChartTitle(this.loggerService.filterObj, this.dataType) });
+       // this.chart.title.update({ "text": this.dataManip.genChartTitle(this.loggerService.filterObj, this.dataType) });
         return;
     }
    

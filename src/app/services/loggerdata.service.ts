@@ -43,6 +43,7 @@ export class LoggerService {
     private jakeMacCreateEntriesUrl = 'http://www.localhost:3000/logv/write?create=true';
     private jakeMacObjUrl = 'http://www.localhost:3000/logv/read/getfiltered/aggregate';
     private jakeMacGetAll = 'http://www.localhost:3000/logv/read/getfiltered';
+    private jakeMacPostUrl = 'http://www.localhost:3000/logv/read/filterget';
 
     private loggerURL = 'http://localhost:3039/read/getall/';
     private filterURL = 'http://localhost:3039/read/filterget'; // POST URL - depricated
@@ -55,6 +56,7 @@ export class LoggerService {
     private carnitasAggregate = 'http://carnitas.rocks/mea/logv/read/getfiltered/aggregate';
     private carnitasCreateEntries = 'http://carnitas.rocks/mea/logv/write';
     private carnitasGetAll = 'http://carnitas.rocks/mea/logv/read/getfiltered';
+    private carnitasObjUrl = 'http://carnitas.rocks/logv/read/filterget';
 
     private subject = new Subject<any>();
     private headers: Headers;
@@ -185,7 +187,7 @@ export class LoggerService {
         if (!returnType) returnType = this.filterObj.returnType;
         //if ( returnType === 'genCount') URL = this.generalCountURL;
         if ( returnType === 'genCount') URL = this.jakeMacObjUrl;
-        else if ( returnType === 'obj') URL = this.jakeMacObjUrl;
+        else if ( returnType === 'obj') URL = this.jakeMacGetAll;
         else if ( returnType === 'objPart') URL = this.objPartURL;
 
         let params: URLSearchParams = new URLSearchParams();
