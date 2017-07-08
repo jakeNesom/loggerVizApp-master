@@ -8,12 +8,26 @@
 
     <!-- Base HREF for Production: -->
     <!--<base href="./">-->
+
+    <!-- Uncomment these in production 
+    -  Jquery CDN
+    - new base HREF (see above) 
+    -->
+    <!--
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+        -->
+    
+
+    <!-- Comment out these in production 
+     - styles.css
+     - jquery from node modules folder
+     - core-js from node_modules folder
+    -->
     <link rel="stylesheet" href="src/styles.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  
-
-    
-    
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
 
